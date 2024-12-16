@@ -1,6 +1,9 @@
 # Utilisation de l'image Node.js certifiée par Red Hat
 FROM registry.access.redhat.com/ubi8/nodejs-16
 
+#Variables d'en
+ARG .env
+
 # Définir le répertoire de travail
 WORKDIR /app
 
