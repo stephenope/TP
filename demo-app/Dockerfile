@@ -16,6 +16,9 @@ RUN npm install
 # Exposition du port
 EXPOSE $APP_PORT
 
+# Exécuter l'application en tant que non-root
+USER 1001
+
 # Démarrage de la base
 RUN npm run database
 
