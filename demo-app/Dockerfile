@@ -17,7 +17,7 @@ COPY package*.json ./
 RUN npm install
 
 # Exposition du port
-EXPOSE $APP_PORT
+EXPOSE 3000
 
 # Exécuter l'application en tant que non-root
 USER 1001
