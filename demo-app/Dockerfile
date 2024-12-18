@@ -1,5 +1,5 @@
 # Utiliser une image Node.js en tant que base
-FROM node:18-alpine
+FROM registry.access.redhat.com/ubi8/nodejs-16
 
 # Créer un répertoire de travail pour l'application
 WORKDIR /app
