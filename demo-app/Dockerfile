@@ -4,6 +4,8 @@ FROM node:18-alpine
 # Créer un répertoire de travail pour l'application
 WORKDIR /app
 
+RUN rm -rf *.json
+
 # Ajouter un utilisateur non-root
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
