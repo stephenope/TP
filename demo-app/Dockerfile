@@ -6,6 +6,10 @@ RUN rm -rf /app
 # Créer un répertoire de travail pour l'application
 WORKDIR /app
 
+# Création du groupe et de l'utilisateur non-root
+RUN groupadd -r appgroup && \
+    useradd -r -g appgroup -d /app -s /sbin/nologin appuser
+
 # Donner les permissions à tous les utilisateurs
 RUN chmod -R 777 /app
 
@@ -19,9 +23,6 @@ RUN npm install
 
 # Copier le reste de l'application
 COPY . .
-
-# Ajouter un utilisateur non-root
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 # Changer les droits du répertoire de travail pour l'utilisateur non-root
 RUN chown -R appuser:appgroup /app
