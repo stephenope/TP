@@ -16,7 +16,7 @@ RUN chown -R appuser:appgroup /app
 COPY package*.json ./
 
 # Installer les dépendances de l'application
-RUN npm install -g npm@11.0.0
+RUN npm install
 
 RUN npm update
 
