@@ -23,7 +23,7 @@ RUN npm install
 COPY . .
 
 # Changer les droits du répertoire de travail pour l'utilisateur non-root
-RUN chown -R appuser:appgroup /app
+# RUN chown -R appuser:appgroup /app
 
 # Exécuter l'application en tant que non-root
 USER 1001
