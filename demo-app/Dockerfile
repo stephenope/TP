@@ -1,29 +1,29 @@
-# Utilisation de l'image Node.js certifiée par Red Hat
-FROM registry.access.redhat.com/ubi8/nodejs-16
+# Utiliser une image Node.js en tant que base
+FROM node:18-alpine
 
-#Variables d'en
-ARG .env
-
-# Définir le répertoire de travail
+# Créer un répertoire de travail pour l'application
 WORKDIR /app
 
-# Donner les permissions à tous les utilisateurs
-RUN chmod -R 777 /app
-
-# Copier le fichier de dépendances
+# Copier le fichier package.json et package-lock.json
 COPY package*.json ./
 
-# Installer les dépendances
-RUN npm install
+# Installer les dépendances de l'application
+RUN npm install --production
 
-# Exposition du port
-EXPOSE 3000
+# Copier le reste de l'application
+COPY . .
 
-# Exécuter l'application en tant que non-root
-USER 1001
+# Ajouter un utilisateur non-root
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-# Démarrage de la base
-RUN npm run database
+# Changer les droits du répertoire de travail pour l'utilisateur non-root
+RUN chown -R appuser:appgroup /app
 
-# Démarrage du noeud
-RUN npm run node
+# Exécuter le processus en tant qu'utilisateur non-root
+USER appuser
+
+# Exposer le port 8080 au lieu de 80 (conformité OpenShift)
+EXPOSE 8080
+
+# Démarrer l'application en utilisant npm start
+CMD ["npm", "start"]
