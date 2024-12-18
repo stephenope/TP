@@ -6,13 +6,16 @@ RUN rm -rf /app
 # Créer un répertoire de travail pour l'application
 WORKDIR /app
 
+# Donner les permissions à tous les utilisateurs
+RUN chmod -R 777 /app
+
 # Copier le fichier package.json et package-lock.json
 COPY package*.json ./
 
 # Installer les dépendances de l'application
 RUN npm install
 
-RUN npm update
+# RUN npm update
 
 # Copier le reste de l'application
 COPY . .
