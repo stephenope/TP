@@ -14,7 +14,7 @@ RUN chown -R appuser:appgroup /app
 COPY package*.json ./
 
 # Installer les dépendances de l'application
-RUN npm install --production
+RUN npm install
 
 # Copier le reste de l'application
 COPY . .
